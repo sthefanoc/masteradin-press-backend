@@ -33,10 +33,18 @@ if (!isProduction) {
 }
 
 if(isProduction){
-  mongoose.connect(process.env.MONGODB_URI);
+  mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true , useUnifiedTopology: true})
+    .then((result) =>{
+      console.log('CONNECTED TO PROD DB')
+    })
+    .catch((err) => console.log('DB CONNECTION ERROR',err))
   console.log('IS PRODUCTION!!', process.env.MONGODB_URI)
 } else {
-  mongoose.connect('mongodb://localhost/masteradin-press');
+  mongoose.connect('mongodb://localhost/masteradin-press',{ useNewUrlParser: true , useUnifiedTopology: true})
+    .then((result) =>{
+      console.log('CONNECTED TO DEV DB')
+    })
+    .catch((err) => console.log('DB CONNECTION ERROR',err))
   console.log('IS DEBUG MODE!!', process.env.NODE_ENV)
   mongoose.set('debug', true);
 }
@@ -86,3 +94,5 @@ app.use(function(err, req, res, next) {
 var server = app.listen( process.env.PORT || 3001, function(){
   console.log('Listening on port ' + server.address().port);
 });
+
+
