@@ -38,7 +38,7 @@ if (!isProduction) {
 if(isProduction){
   mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true , useUnifiedTopology: true})
     .then((result) =>{
-      console.log('CONNECTED TO PROD DB')
+      console.log('CONNECTED TO PROD DB UPDATED')
     })
     .catch((err) => console.log('DB CONNECTION ERROR',err))
   console.log('IS PRODUCTION!!', process.env.MONGODB_URI)
